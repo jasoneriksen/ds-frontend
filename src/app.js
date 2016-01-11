@@ -6,7 +6,7 @@ let store = {
 
     set: function(prop, value) {
         localStorage[prop] = JSON.stringify(value);      
-    }
+    },
 };
 
 const Main = React.createClass({
