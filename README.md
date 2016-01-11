@@ -1,7 +1,7 @@
 DataScience's Frontend Code Test
 ==================
 
-Jason Eriksen's solution for the DataScience at-home exercise for frontend developers. It runs from the local index.html file and uses React for views.
+My solution for the DataScience at-home exercise for frontend developers. It runs from the local index.html file and uses React for views. To avoid the need for a local server instance, I moved the recipes.json file to a .js file included by the index page.
 
 ## Instructions
 
