@@ -1,7 +1,7 @@
 DataScience's Frontend Code Test
 ==================
 
-Jason Eriksen's solution for the DataScience at-home exercise for frontend developers. It uses React for views and localStorage for persistence. 
+Jason Eriksen's solution for the DataScience at-home exercise for frontend developers. It runs from the local index.html file and uses React for views.
 
 ## Instructions
 
@@ -19,12 +19,6 @@ The built js files are included in the repo, but you can build from source with 
 * install babel `npm install --global babel-cli`
 * install dependencies: `npm install`
 * build: `npm run build`
-
-## Assignment Instructions
-
-* Clone this repo
-* Complete the exercise and submit either a zip of the solution or a link to a new repo
-* You may use any resources, frameworks, libraries, etc and style the markup however you like.
 
 ## Requirements
 
