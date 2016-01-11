@@ -1,4 +1,4 @@
-[
+const RECIPES = [
     {
         "name": "Risotto",
         "type": "Italian",
@@ -47,4 +47,4 @@
         "cook_time": 28,
         "ingredients": ["Onion", "Oil", "Rice", "Egg", "Soy Sauce", "Sesame Oil", "Chicken", "Carrot", "Peas"]
     }
-]
+];
