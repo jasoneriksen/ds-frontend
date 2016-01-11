@@ -3,12 +3,23 @@ let store = {
         if(localStorage[prop] === undefined) return null;
         return JSON.parse(localStorage[prop]);
     },
+
     set: function(prop, value) {
         localStorage[prop] = JSON.stringify(value);      
     }
 };
 
 const Main = React.createClass({
+    style: {
+        input: {
+            fontSize: '1.25rem',
+            border: 'solid #888 1px',
+            borderRadius: '2px',
+            lineHeight: '1.5rem',
+            padding: '0.5rem',
+        }
+    },
+
     getInitialState: function(){
         return {
             recipes: store.get('recipes') || RECIPES,
@@ -25,16 +36,18 @@ const Main = React.createClass({
             });
             return match.length > 0;
         });
+
         store.set('recipes', filteredRecipes);
+
         this.setState({
             filter: text,
             recipes: filteredRecipes
         });
     },
-
-    updateFilter: function(e){
-        const text = e.target.value;
+    
+    setFilterText: function(text){
         store.set('filter', text);
+        
         if(!text.length) {
             store.set('recipes', RECIPES);
             this.setState({ 
@@ -43,15 +56,24 @@ const Main = React.createClass({
             });
             return; 
         }
+
         this.filterByIngredient(text);
+    },
+
+    updateFilter: function(e){
+        this.setFilterText(e.target.value);
     },
 
     updateSelectedRecipes: function(recipe, checked) {
         const selectedRecipes = this.state.selectedRecipes;
+        
         if(checked) selectedRecipes.push(recipe);
         else selectedRecipes.splice(selectedRecipes.indexOf(recipe), 1);
+        
         store.set('selectedRecipes', selectedRecipes);
-        this.setState({ selectedRecipes: selectedRecipes });
+        this.setState({ 
+            selectedRecipes: selectedRecipes 
+        });
     },
 
     render: function(){
@@ -60,17 +82,19 @@ const Main = React.createClass({
                 <p>Filter by Ingredient:</p>
                 <input
                     type="text"
-                    onChange={this.updateFilter}
-                    value={this.state.filter}
+                    style={ this.style.input }
+                    onChange={ this.updateFilter }
+                    value={ this.state.filter }
                 />
                 <IngredientList
-                    selectedRecipes={this.state.selectedRecipes}
+                    updateFilter={ this.setFilterText }
+                    selectedRecipes={ this.state.selectedRecipes }
                 />
                 <RecipeList
                     minColumnWidth="400"
-                    updateSelected={this.updateSelectedRecipes}
-                    selectedRecipes={this.state.selectedRecipes}
-                    recipes={this.state.recipes}
+                    updateSelected={ this.updateSelectedRecipes }
+                    selectedRecipes={ this.state.selectedRecipes }
+                    recipes={ this.state.recipes }
                 />
             </div>
         );

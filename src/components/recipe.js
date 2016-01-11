@@ -1,29 +1,8 @@
 const Recipe = React.createClass({
-    
-    getBackgroundColor: function() {
-        switch(this.props.type.toLowerCase()) {
-            case 'russian':
-                return 'darkred';
-                break;
-            case 'italian':
-                return 'darkgreen';
-                break;
-            case 'chinese':
-                return 'orange';
-                break;
-            case 'salvadoran':
-                return 'darkblue';
-                break;
-            default:
-                return '#acccef';
-        }
-    },
-
     getStyle: function() {
-        const background = this.getBackgroundColor();
         return {
             wrapper: {
-                backgroundColor: background,          
+                backgroundColor: '#1c1cb0',          
                 display: 'inline-block',
                 width: '90%',
                 borderRadius: '3px',
@@ -52,7 +31,7 @@ const Recipe = React.createClass({
     renderIngredients: function() {
         return this.props.ingredients.map((ingredient) => {
             return (
-                <li>{ingredient}</li> 
+                <li>{ ingredient }</li> 
             ); 
         });
     },
@@ -60,20 +39,20 @@ const Recipe = React.createClass({
     render: function() {
         const props = this.props;
         return(
-            <div style={this.getStyle().wrapper}>
-                <div style={this.getStyle().recipe}>
+            <div style={ this.getStyle().wrapper }>
+                <div style={ this.getStyle().recipe }>
                     <input
                         type="checkbox" 
-                        checked={this.props.isSelected}
-                        onChange={this.updateChecked} 
+                        checked={ this.props.isSelected }
+                        onChange={ this.updateChecked } 
                     />
-                    <p style={this.getStyle().name}>{props.name}</p>
-                    <p>{props.type}</p>
+                    <p style={ this.getStyle().name }>{ props.name }</p>
+                    <p>{ props.type }</p>
                     <p>
-                        <span>&#x231b;</span> {props.cook_time} minutes
+                        <span>&#x231b;</span> { props.cook_time } minutes
                     </p>
                     <p>Ingredients:</p>
-                    <ul>{this.renderIngredients()}</ul>
+                    <ul>{ this.renderIngredients() }</ul>
                 </div>
             </div>
         );

@@ -8,7 +8,10 @@ var RecipeList = React.createClass({
     updateColumnCount: function updateColumnCount() {
         var width = this.props.width || window.outerWidth;
         var columns = Math.floor(width / (this.props.minColumnWidth || 400)) + 1;
-        this.setState({ columnCount: columns });
+
+        this.setState({
+            columnCount: columns
+        });
     },
 
     componentDidMount: function componentDidMount() {
@@ -18,6 +21,7 @@ var RecipeList = React.createClass({
 
     getStyle: function getStyle() {
         var columnCount = this.state && this.state.columnCount;
+
         return {
             wrapper: {
                 display: 'block',
@@ -41,6 +45,7 @@ var RecipeList = React.createClass({
 
         return this.props.recipes.map(function (recipe) {
             var isSelected = _this.props.selectedRecipes.indexOf(recipe.name) !== -1;
+
             return React.createElement(Recipe, _extends({}, recipe, {
                 isSelected: isSelected,
                 onCheckChange: _this.props.updateSelected

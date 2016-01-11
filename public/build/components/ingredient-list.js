@@ -15,10 +15,12 @@ var IngredientList = React.createClass({
     getStyle: function getStyle() {
         return {
             display: 'inline-block',
+            cursor: 'pointer',
             border: 'solid black 1px',
+            background: '#eee',
+            borderRadius: '2px',
             margin: '0 0.25rem 0.25rem 0',
             padding: '0.25rem'
-
         };
     },
 
@@ -28,38 +30,53 @@ var IngredientList = React.createClass({
         var selectedRecipes = RECIPES.filter(function (recipe) {
             return _this.props.selectedRecipes.indexOf(recipe.name) !== -1;
         });
-        if (!selectedRecipes.length) return;
+
+        if (!selectedRecipes.length) return [];
         if (selectedRecipes.length === 1) return selectedRecipes[0].ingredients.sort();
+
         return selectedRecipes.reduce(appendIngredients).sort().filter(uniqueValues);
     },
 
-    renderIngredients: function renderIngredients() {
+    updateFilter: function updateFilter(e) {
+        this.props.updateFilter(e.target.innerHTML);
+    },
+
+    renderHeader: function renderHeader(ingredients) {
+        return ingredients.length ? React.createElement(
+            'p',
+            null,
+            'Required Ingredients:'
+        ) : null;
+    },
+
+    renderIngredients: function renderIngredients(ingredients) {
         var _this2 = this;
 
-        var ingredients = this.getIngredients();
         if (!ingredients) return;
+
         return ingredients.map(function (ingredient) {
             return React.createElement(
                 'li',
-                { style: _this2.getStyle() },
+                {
+                    ref: ingredient,
+                    style: _this2.getStyle(),
+                    onClick: _this2.updateFilter },
                 ingredient
             );
         });
     },
 
     render: function render() {
+        var ingredients = this.getIngredients();
+
         return React.createElement(
             'div',
             null,
-            React.createElement(
-                'p',
-                null,
-                'Ingredients:'
-            ),
+            this.renderHeader(ingredients),
             React.createElement(
                 'ul',
                 null,
-                this.renderIngredients()
+                this.renderIngredients(ingredients)
             )
         );
     }

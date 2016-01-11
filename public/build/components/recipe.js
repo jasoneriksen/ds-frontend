@@ -3,30 +3,10 @@
 var Recipe = React.createClass({
     displayName: 'Recipe',
 
-    getBackgroundColor: function getBackgroundColor() {
-        switch (this.props.type.toLowerCase()) {
-            case 'russian':
-                return 'darkred';
-                break;
-            case 'italian':
-                return 'darkgreen';
-                break;
-            case 'chinese':
-                return 'orange';
-                break;
-            case 'salvadoran':
-                return 'darkblue';
-                break;
-            default:
-                return '#acccef';
-        }
-    },
-
     getStyle: function getStyle() {
-        var background = this.getBackgroundColor();
         return {
             wrapper: {
-                backgroundColor: background,
+                backgroundColor: '#1c1cb0',
                 display: 'inline-block',
                 width: '90%',
                 borderRadius: '3px',

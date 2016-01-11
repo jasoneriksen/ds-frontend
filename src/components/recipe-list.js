@@ -3,7 +3,10 @@ const RecipeList = React.createClass({
     updateColumnCount: function() {
         const width = this.props.width || window.outerWidth;
         const columns = Math.floor(width  / (this.props.minColumnWidth || 400)) + 1;
-        this.setState({columnCount: columns});
+
+        this.setState({
+            columnCount: columns
+        });
     },
 
     componentDidMount: function() {
@@ -13,6 +16,7 @@ const RecipeList = React.createClass({
 
     getStyle: function() {
         const columnCount = this.state && this.state.columnCount;
+
         return {
             wrapper: {
                 display: 'block',          
@@ -27,18 +31,19 @@ const RecipeList = React.createClass({
                 columnGap: '1rem',
                 margin: 0,
                 padding: 0,
-            }
+            },
         }
     },
 
     renderRecipes: function() {
         return this.props.recipes.map((recipe) => {
             const isSelected = this.props.selectedRecipes.indexOf(recipe.name) !== -1;
+
             return (
                 <Recipe
-                    {...recipe}
-                    isSelected={isSelected}
-                    onCheckChange={this.props.updateSelected}
+                    { ...recipe }
+                    isSelected={ isSelected }
+                    onCheckChange={ this.props.updateSelected }
                 />
             );
         });
@@ -46,11 +51,11 @@ const RecipeList = React.createClass({
 
     render: function() {
         return(
-            <div style={this.getStyle().wrapper}>
-                <div style={this.getStyle().list}>
+            <div style={ this.getStyle().wrapper }>
+                <div style={ this.getStyle().list }>
                 { this.renderRecipes() }
                 </div>
             </div>
         );
-    }
+    },
 });
